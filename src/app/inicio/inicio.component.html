@@ -27,7 +27,7 @@
     <h2>Busca entre todas las ediciones</h2>
     <div class="carousel-ediciones">
         <a *ngFor="let set of sets" class="edicion" routerLink="/coleccion/{{set.code}}">
-            <img [src]="'../../assets/imagenes/boxes/' + set.code + 'box.png'" alt="{{set.code}}">
+            <img [src]="'assets/imagenes/boxes/' + set.code + 'box.png'" alt="{{set.code}}">
         </a>
     </div>
 </div>

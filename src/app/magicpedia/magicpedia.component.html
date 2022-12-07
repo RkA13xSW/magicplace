@@ -1,7 +1,7 @@
 <section id="contenedorCartas" >
     <div class="filtro">
         <button (click)="togleFiltrosCaja()">
-            <img src="../../assets/iconos/vectores/filter.png" alt="Filter">
+            <img src="assets/iconos/vectores/filter.png" alt="Filter">
         </button>
         <div>
             <input (change)="applyFiler(key.value)" type="search" #key="ngModel" ngModel name="key" id="buscador" placeholder="Buscar...">
@@ -34,7 +34,7 @@
     <h4 id="error" *ngIf="cartas.length == 0">No se han encontrado coincidencias...</h4>
 
     <div class="volver" (click)="irArriba()">
-        <img src="../../assets/iconos/vectores/arrowup.png" alt="Arriba">
+        <img src="assets/iconos/vectores/arrowup.png" alt="Arriba">
     </div>
 
     <div class="caja-filtros">
