@@ -1,0 +1,19 @@
+<div class="mazos">
+    <div class="mazo mazo-crear" routerLink="crear">
+        <h2>+</h2>
+    </div>
+    <div class="mazo" *ngFor="let mazo of mazosGuardados">
+        <h4>{{mazo.nombre}}</h4>
+        <div class="opciones">
+            <button routerLink="../mazo/{{mazo.id}}">
+                <img src="../../assets/iconos/vectores/ver.png" alt="Ver" title="Ver">
+            </button>
+            <button routerLink="modificar/{{mazo.id}}">
+                <img src="../../assets/iconos/vectores/editar.png" alt="Editar" title="Editar">
+            </button>
+            <button (click)="borrarMazo(mazo.id)">
+                <img src="../../assets/iconos/vectores/borrar.png" alt="Eliminar" title="Eliminar">
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,194 @@
+<section id="contenedorCartas" >
+    <div class="filtro">
+        <button (click)="togleFiltrosCaja()">
+            <img src="../../assets/iconos/vectores/filter.png" alt="Filter">
+        </button>
+        <div>
+            <input (change)="applyFiler(key.value)" type="search" #key="ngModel" ngModel name="key" id="buscador" placeholder="Buscar...">
+        </div>
+    </div>
+
+    <div class="filtros-aplicados">
+        <span *ngIf="filtros.q.length > 0">Nombre : {{filtros.q}}</span>
+        <span *ngIf="filtros.unique.length > 0">Unico : {{filtros.unique}}</span>
+        <span *ngIf="filtros.order.length > 0">Orden : {{filtros.order}}</span>
+        <span *ngIf="filtros.include_extras">Incluir extras</span>
+        <span *ngIf="filtros.include_multilingual">Plurilingüe</span>
+        <span *ngIf="filtros.include_variations">Ver variaciones</span>
+        <span *ngIf="filtros.color.length > 0">Color : {{filtros.color}}</span>
+        <span *ngIf="filtros.edicion.length > 0">Edicion : {{filtros.edicion}}</span>
+        <span *ngIf="filtros.rareza.length > 0">Rareza : {{filtros.rareza}}</span>
+        <span *ngIf="filtros.tipo.length > 0">Tipo : {{filtros.tipo}}</span>
+        <span *ngIf="filtros.tipoE.length > 0">Tipo Espefícico : {{filtros.tipoE}}</span>
+        <span *ngIf="filtros.formato.length > 0">Formato : {{filtros.formato}}</span>
+    </div>
+
+    <div class="cartas" *ngIf="cartas.length > 0">
+        <div class="carta" routerLink="{{carta.id}}" *ngFor="let carta of cartas">
+            <div class="carta-img">
+                <img *ngIf="carta?.image_uris != undefined && carta?.image_uris.border_crop != null" [src]="carta.image_uris.border_crop" [alt]="carta.name">
+                <img *ngIf="carta?.card_faces != undefined && carta.card_faces[0].image_uris?.border_crop != null" [src]="carta.card_faces[0].image_uris.border_crop" [alt]="carta.name">
+            </div>
+        </div>
+    </div>
+    <h4 id="error" *ngIf="cartas.length == 0">No se han encontrado coincidencias...</h4>
+
+    <div class="volver" (click)="irArriba()">
+        <img src="../../assets/iconos/vectores/arrowup.png" alt="Arriba">
+    </div>
+
+    <div class="caja-filtros">
+        <div class="cerrar">
+            <button (click)="togleFiltrosCaja()">X</button>
+        </div>
+        <div class="campo">
+            <label for="unique">Unico:</label>
+            <select (change)="addFiltro($event)" name="unique" id="unique">
+                <option value="cards" >Cartas</option>
+                <option value="art"  >Arte</option>
+                <option value="prints" >Impreso</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label for="order">Orden:</label>
+            <select name="order" id="order" (change)="addFiltro($event)">
+                <option value="name">Nombre</option>
+                <option value="set" >Edicion</option>
+                <option value="released" >Lanzamiento</option>
+                <option value="rarity" >Rareza</option>
+                <option value="color" >Color</option>
+                <option value="usd">Precio $</option>
+                <option value="tix">Tix</option>
+                <option value="eur">Precio €</option>
+                <option value="cmc">Mana</option>
+                <option value="power">Fuerza</option>
+                <option value="toughness" >Resistencia</option>
+                <option value="edhrec">Edhrec</option>
+                <option value="penny" >Ranking</option>
+                <option value="artist">Artista</option>
+                <option value="review">Revisión</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label for="include_extras">Extras:</label>
+            <input (change)="addFiltro($event)" type="checkbox" name="include_extras" id="include_extras" [checked]="filtros.include_extras">
+        </div>
+        <div class="campo">
+            <label for="include_multilingual">Plurilingüe:</label>
+            <input (change)="addFiltro($event)" type="checkbox" name="include_multilingual" id="include_multilingual" [checked]="filtros.include_multilingual">
+        </div>
+        <div class="campo">
+            <label for="include_variations">Variantes:</label>
+            <input (change)="addFiltro($event)" type="checkbox" name="include_variations" id="include_variations" [checked]="filtros.include_variations">
+        </div>
+        <div class="campo">
+            <label for="tipo">Tipo:</label>
+            <select (change)="addFiltro($event)" name="tipo" id="tipo">
+                <option value="" selected>Todos</option>
+                <option value="creature" >Criaturas</option>
+                <option value="spell" >Hechizos</option>
+                <option value="instant" >Instanteneos</option>
+                <option value="sorcery" >Conjuros</option>
+                <option value="planeswalker" >Planeswalkers</option>
+                <option value="enchantment" >Encantamientos</option>
+                <option value="land" >Tierras</option>
+                <option value="artifact" >Artefactos</option>
+            </select>
+        </div>
+        <!-- TODO: TIPOS: -->
+        <div class="campo noVer" id="SLT-creature">
+            <label for="tipoE" class="slc-op">Criaturas:</label>
+            <select (change)="addFiltro($event)" name="tipoE" id="tipoE" class="slc-op">
+                <option value="" selected>Todos</option>
+                <option *ngFor="let creature of tipos.creature" [value]="creature" >{{creature}}</option>
+            </select>
+        </div>
+        <div class="campo noVer" id="SLT-spell">
+            <label for="tipoE"  class="slc-op">Hechizos:</label>
+            <select (change)="addFiltro($event)" name="tipoE" id="tipoE" class="slc-op">
+                <option value="" selected>Todos</option>
+                <option [value]="spell" *ngFor="let spell of tipos.spell">{{spell}}</option>
+            </select>
+        </div>
+        <div class="campo noVer" id="SLT-planeswalker">
+            <label for="tipoE"  class="slc-op">Planeswalkers:</label>
+            <select (change)="addFiltro($event)" name="tipoE" id="tipoE" class="slc-op">
+                <option value="" selected>Todos</option>
+                <option [value]="planeswalker" *ngFor="let planeswalker of tipos.planeswalker">{{planeswalker}}</option>
+            </select>
+        </div>
+        <div class="campo noVer" id="SLT-land">
+            <label for="tipoE" class="slc-op">Tierras:</label>
+            <select (change)="addFiltro($event)" name="tipoE" id="tipoE" class="slc-op">
+                <option value="" selected>Todos</option>
+                <option [value]="land" *ngFor="let land of tipos.land">{{land}}</option>
+            </select>
+        </div>
+        <div class="campo noVer" id="SLT-artifact">
+            <label for="tipoE" class="slc-op">Artefactos:</label>
+            <select (change)="addFiltro($event)" name="tipoE" id="tipoE" class="slc-op">
+                <option value="" selected>Todos</option>
+                <option [value]="artifact" *ngFor="let artifact of tipos.artifact">{{artifact}}</option>                
+            </select>
+        </div>
+        <div class="campo noVer" id="SLT-enchantment">
+            <label for="tipoE" class="slc-op">Encantamientos:</label>
+            <select (change)="addFiltro($event)" name="tipoE" id="tipoE" class="slc-op">
+                <option value="" selected>Todos</option>
+                <option [value]="enchantment" *ngFor="let enchantment of tipos.enchantment">{{enchantment}}</option>                
+            </select>
+        </div>
+
+        <!-- TODO: TIPOS: -->
+
+        <div class="campo">
+            <label for="rareza">Rareza:</label>
+            <select (change)="addFiltro($event)" name="rareza" id="rareza">
+                <option value="" selected>Todas</option>
+                <option value="common" >Común</option>
+                <option value="uncommon" >Infrecuente</option>
+                <option value="rare" >Rara</option>
+                <option value="mythic" >Mítica</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label for="formato">Formato:</label>
+            <select (change)="addFiltro($event)" name="formato" id="formato">
+                <option value="" selected>Ninguna</option>
+                <option style="text-transform: capitalize;" [value]="formato" *ngFor="let formato of formatos">{{formato}}</option>
+            </select>
+        </div>
+        <div class="caja-select">
+            <mat-form-field>
+                <mat-label>Color</mat-label>
+                <mat-select (click)="addFiltroEsp('color', '')">
+                    <mat-option value="">
+                        Ninguno
+                    </mat-option>
+                  <mat-option (click)="addFiltroEsp('color', color.symbol)" *ngFor="let color of colores" [value]="color.symbol">
+                    <img with="20" height="20" [src]="color.svg_uri">
+                    {{color.symbol}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="caja-select">
+            <mat-form-field>
+                <mat-label>Ediciones</mat-label>
+                <mat-select (change)="addFiltro($event)">
+                    <mat-option value="" (click)="addFiltroEsp('edicion', '')">
+                        Ninguno
+                    </mat-option>
+                  <mat-option (click)="addFiltroEsp('edicion', set.code)" *ngFor="let set of sets" [value]="set.code">
+                    <img with="20" height="20" [src]="set.icon_svg_uri">
+                    {{set.name}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="campo2">
+            <!-- <button>Aplicar</button> -->
+            <button (click)="limpiarFiltros()">Limpiar Filtros</button>
+        </div>
+    </div>
+</section>

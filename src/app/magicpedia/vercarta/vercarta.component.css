@@ -1,0 +1,184 @@
+.contenedor-carta{
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background-color: var(--B);
+    overflow-x: hidden;
+    padding-top: 150px;
+}
+
+.carta{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px auto;
+
+    width: fit-content;
+    max-width: calc(100% - 25px);
+    min-width: 50vw;
+    padding: 10px;
+}
+
+.carta .img-carta{
+    max-width: 300px;
+    z-index: 2;
+}
+
+.carta .img-carta button{
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: x-large;
+    border-radius: 100%;
+    background-color: var(--N);
+    color: var(--B);
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.carta .img-carta button:hover{
+    transition: 0.3s;
+    opacity: 1;
+    box-shadow: 2px 2px 2px var(--R);
+
+}
+
+.carta .img-carta img{
+    max-width: inherit;
+    border-radius: 10px;
+    box-shadow: 2px 5px 10px black;
+    margin-top: -20px;
+}
+
+.carta .info-carta{
+    display: flex;
+    flex-direction: column;
+    color: var(--N);
+    background-color: var(--B);
+    border-top: 5px solid var(--N);
+    border-bottom: 5px solid var(--N);
+    font-family: monospace;
+    min-width: 40%;
+    max-width: 320px;
+    padding-left: 10px;
+    margin-left: -10px;
+}
+
+.carta .info-carta h4{
+    padding: 5px;
+    padding-left: 10px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.6);
+    color: var(--R);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.carta .info-carta p{
+    padding: 5px;
+    padding-left: 10px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.6);
+}
+
+.carta .info-carta div.legalities{
+    padding: 5px;
+    padding-left: 10px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.6);
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.carta .info-carta div.legalities span.legal{
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(83, 164, 83);
+    text-transform: capitalize;
+    min-width: 40%;
+    text-align: center;
+    box-shadow: 2px 2px 2px grey;
+}
+
+.carta .info-carta div.legalities span.not_legal{
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(181, 67, 67);
+    text-transform: capitalize;
+    min-width: 40%;
+    text-align: center;
+    box-shadow: 2px 2px 2px grey;
+}
+
+
+.carta .info-carta div.legalities span.restricted{
+    border-radius: 10px;
+    padding: 5px;
+    background-color: grey;
+    text-transform: capitalize;
+    min-width: 40%;
+    text-align: center;
+    box-shadow: 2px 2px 2px grey;
+}
+
+.carta .info-carta div.legalities span.banned{
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(83, 155, 131);
+    text-transform: capitalize;
+    text-decoration: line-through;
+    min-width: 40%;
+    text-align: center;
+    box-shadow: 2px 2px 2px grey;
+}
+
+
+/* !otros-datos */
+.otros-datos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    border-top: 2px dotted rgba(128, 128, 128, 0.615);
+    padding: 20px 0px;
+}
+
+.precios, .descargas{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--N);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--N);
+    height: fit-content;
+}
+.precios h4, .descargas h4{
+    color: var(--R);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 5px;
+    text-align: center;
+}
+
+.precios a, .descargas a{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--N);
+    background-color: var(--R);
+    padding: 10px;
+}
+
+.precios a span{
+    margin: 0px 5px;
+}
+
+.precios a:hover, .descargas a:hover{
+    transition: 0.3s;
+    background-color: var(--N);
+    color: var(--R);
+}

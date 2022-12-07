@@ -1,0 +1,108 @@
+<div class="mazo">
+    <div class="info">
+        <h3>{{mazo.nombre}}</h3>
+        <div class="precios-mazo">
+            <p>Normal..... {{(precios.eur| number:'1.2-2')}}€</p>
+            <p>Foil........... {{(precios.eur_foil| number:'1.2-2')}}€</p>
+            <p>Normal..... {{(precios.usd| number:'1.2-2')}}$</p>
+            <p>Foil........... {{(precios.usd_foil| number:'1.2-2')}}$</p>
+            <p>Tix............ {{(precios.tix| number:'1.2-2')}}</p>
+        </div>
+        <a class="descarga" (click)="generatePDF(mazo.nombre)">Descargar Presupuesto</a>
+    </div>
+    <div class="principal">
+        <h4>Principal ({{cantidades.principal}})</h4>
+        <div class="cartas">
+            <div class="carta" *ngFor="let carta of cartasMostradas.principal">
+                <div class="carta-img">
+                    <a target="_blank" routerLink="../../catalogo/{{carta.datos.id}}">    
+                        <img *ngIf="carta.datos?.image_uris != undefined && carta.datos?.image_uris.border_crop != null" [src]="carta.datos.image_uris.border_crop" [alt]="carta.datos.name">
+                        <img *ngIf="carta.datos?.card_faces != undefined && carta.datos.card_faces[0].image_uris?.border_crop != null" [src]="carta.datos.card_faces[0].image_uris.border_crop" [alt]="carta.datos.name">
+                    </a> 
+                </div>
+                <div class="carta-opciones">
+                    <div class="carta-cantidad">
+                        <span>x{{carta.cantidad}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banquillo">
+        <h4>Banquillo ({{cantidades.banquillo}})</h4>
+        <div class="cartas">
+            <div class="carta" *ngFor="let carta of cartasMostradas.banquillo">
+                <div class="carta-img">
+                    <a target="_blank" routerLink="../../catalogo/{{carta.datos.id}}">    
+                        <img *ngIf="carta.datos?.image_uris != undefined && carta.datos?.image_uris.border_crop != null" [src]="carta.datos.image_uris.border_crop" [alt]="carta.datos.name">
+                        <img *ngIf="carta.datos?.card_faces != undefined && carta.datos.card_faces[0].image_uris?.border_crop != null" [src]="carta.datos.card_faces[0].image_uris.border_crop" [alt]="carta.datos.name">
+                    </a> 
+                </div>
+                <div class="carta-opciones">
+                    <div class="carta-cantidad">
+                        <span>x{{carta.cantidad}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="presupuesto-mazo">
+        <div class="info">
+            <h3>{{mazo.nombre}}</h3>
+            <div class="precios-mazo">
+                <p>Normal..... {{(precios.eur| number:'1.2-2')}}€</p>
+                <p>Foil........... {{(precios.eur_foil| number:'1.2-2')}}€</p>
+                <p>Normal..... {{(precios.usd| number:'1.2-2')}}$</p>
+                <p>Foil........... {{(precios.usd_foil| number:'1.2-2')}}$</p>
+                <p>Tix............ {{(precios.tix| number:'1.2-2')}}</p>
+            </div>
+        </div>
+        <h2>Principal ({{cantidades.principal}})</h2>
+        <table>
+            <tr>
+                <th>Cantidad</th>
+                <th>Nombre</th>
+                <th>MKM</th>
+                <th>Foil €</th>
+                <th>NML €</th>
+                <th>Foil $</th>
+                <th>NML $</th>
+                <th>TIX</th>
+            </tr>
+            <tr *ngFor="let carta of cartasMostradas.principal">
+                <td>x{{carta.cantidad}}</td>
+                <td>{{carta.datos.name}}</td>
+                <td>{{(carta.datos.purchase_uris?.cardmarket != null)? carta.datos.purchase_uris.cardmarket : '???'}}</td>
+                <td>{{(carta.datos.prices.eur_foil != null)? carta.datos.prices.eur_foil : '???'}}</td>
+                <td>{{(carta.datos.prices.eur != null)? carta.datos.prices.eur : '???'}}</td>
+                <td>{{(carta.datos.prices.usd_foil != null)? carta.datos.prices.usd_foil : '???'}}</td>
+                <td>{{(carta.datos.prices.usd != null)? carta.datos.prices.usd : '???'}}</td>
+                <td>{{(carta.datos.prices.tix != null)? carta.datos.prices.tix : '???'}}</td>
+              </tr>
+        </table>
+        <h2>Banquillo ({{cantidades.banquillo}})</h2>
+        <table>
+            <tr>
+                <th>Cantidad</th>
+                <th>Nombre</th>
+                <th>MKM</th>
+                <th>Foil €</th>
+                <th>NML €</th>
+                <th>Foil $</th>
+                <th>NML $</th>
+                <th>TIX</th>
+            </tr>
+            <tr *ngFor="let carta of cartasMostradas.banquillo">
+                <td>x{{carta.cantidad}}</td>
+                <td>{{carta.datos.name}}</td>
+                <td>{{(carta.datos.purchase_uris?.cardmarket != null)? carta.datos.purchase_uris.cardmarket : '???'}}</td>
+                <td>{{(carta.datos.prices.eur_foil != null)? carta.datos.prices.eur_foil : '???'}}</td>
+                <td>{{(carta.datos.prices.eur != null)? carta.datos.prices.eur : '???'}}</td>
+                <td>{{(carta.datos.prices.usd_foil != null)? carta.datos.prices.usd_foil : '???'}}</td>
+                <td>{{(carta.datos.prices.usd != null)? carta.datos.prices.usd : '???'}}</td>
+                <td>{{(carta.datos.prices.tix != null)? carta.datos.prices.tix : '???'}}</td>
+              </tr>
+        </table>
+        <p>Atentamente MagicPlace.</p>
+    </div>
+</div>

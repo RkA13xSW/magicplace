@@ -1,0 +1,38 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --N: #000000; 
+    --G: #3E3636;
+    --R: #D72323;
+    --B: #F5EDED;
+}
+
+body{
+    background-color: var(--B);
+    height: auto;
+    width: 100vw;
+    overflow-x: hidden;
+}
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--N);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--R);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--G);
+  }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

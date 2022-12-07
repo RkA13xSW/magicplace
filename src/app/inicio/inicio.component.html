@@ -1,0 +1,33 @@
+<div class="inicio">
+    <div class="filtro"></div>
+    <div class="box">
+        <h2>Bienvenid@ a <span>MagicPlace</span> </h2>
+        <h4>Vuestra página de Magic de confianza</h4>
+    </div>
+</div>
+<div class="nuevas-cartas">
+    <h2>Encuentra tus cartas favoritas</h2>
+    <div id="carousel-cartas">
+            <input (click)="borrarIntervalo()" type="radio" class="posicion-carousel-cartas" name="position" checked />
+            <input (click)="borrarIntervalo()" type="radio" class="posicion-carousel-cartas" name="position" />
+            <input (click)="borrarIntervalo()" type="radio" class="posicion-carousel-cartas" name="position" />
+            <input (click)="borrarIntervalo()" type="radio" class="posicion-carousel-cartas" name="position" />
+            <input (click)="borrarIntervalo()" type="radio" class="posicion-carousel-cartas" name="position" />
+        <section id="carousel1">
+            <div class="carta-carousel" *ngFor="let carta of cartas">
+                <a>
+                <img *ngIf="carta?.image_uris != undefined && carta?.image_uris.border_crop != null" [src]="carta.image_uris.border_crop" [alt]="">
+                <img *ngIf="carta?.card_faces != undefined && carta.card_faces[0].image_uris?.border_crop != null" [src]="carta.card_faces[0].image_uris.border_crop" [alt]="">
+                </a>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="nuevas-ediciones">
+    <h2>Busca entre todas las ediciones</h2>
+    <div class="carousel-ediciones">
+        <a *ngFor="let set of sets" class="edicion" routerLink="/coleccion/{{set.code}}">
+            <img [src]="'../../assets/imagenes/boxes/' + set.code + 'box.png'" alt="{{set.code}}">
+        </a>
+    </div>
+</div>

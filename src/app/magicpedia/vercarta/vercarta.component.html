@@ -1,0 +1,83 @@
+<div class="contenedor-carta">
+    <div class="carta" *ngIf="carta != undefined">
+        <div class="img-carta" *ngIf="carta.image_uris != undefined">
+            <img [src]="carta.image_uris.border_crop" [alt]="carta.name">
+        </div>
+        <div class="img-carta" *ngIf="carta.image_uris == undefined && carta.card_faces != undefined">
+            <button (click)="this.caraActual = !this.caraActual;">&#8635;</button>
+            <img [src]="(caraActual)?carta.card_faces[0].image_uris.border_crop : carta.card_faces[1].image_uris.border_crop" [alt]="(caraActual)?carta.card_faces[0].name:carta.card_faces[1].name">
+        </div>
+        <div class="info-carta">
+            <h4 *ngIf="carta.image_uris != undefined">{{carta.name}}</h4>
+            <h4 *ngIf="carta.image_uris == undefined && carta.card_faces != undefined">{{(caraActual)?carta.card_faces[0].name : carta.card_faces[1].name}}</h4>
+            
+            <p *ngIf="carta.image_uris != undefined">{{carta.type_line}}</p>
+            <p *ngIf="carta.image_uris == undefined && carta.card_faces != undefined">{{(caraActual)?carta.card_faces[0].type_line : carta.card_faces[1].type_line}}</p>
+            
+            <p *ngIf="carta.image_uris != undefined">{{carta.oracle_text}}</p>
+            <p *ngIf="carta.image_uris == undefined && carta.card_faces != undefined">{{(caraActual)?carta.card_faces[0].oracle_text : carta.card_faces[1].oracle_text}}</p>
+
+            <p *ngIf="carta.image_uris != undefined"><i>{{(carta.flavor_text != undefined)? carta.flavor_text : '???'}}</i></p>
+            <p *ngIf="carta.image_uris == undefined && carta.card_faces != undefined"><i>{{(caraActual)? ((carta.card_faces[0].flavor_text != undefined)? carta.card_faces[0].flavor_text : '???') : carta.card_faces[1].flavor_text}}</i></p>
+
+            <p *ngIf="carta.image_uris != undefined && carta.power != null && carta.toughness != null">{{carta.power}}/{{carta.toughness}}</p>
+            <p *ngIf="carta.image_uris == undefined && carta.card_faces != undefined">{{(caraActual)?carta.card_faces[0].power : carta.card_faces[1].power}}/{{(caraActual)?carta.card_faces[0].toughness : carta.card_faces[1].toughness}}</p>
+
+
+            <p>Ilustrado por <strong>{{carta.artist}}</strong></p>
+            <div class="legalities">
+                <span [ngClass]="carta.legalities.alchemy">alchemy</span>
+                <span [ngClass]="carta.legalities.brawl">brawl</span>
+                <span [ngClass]="carta.legalities.commander">commander</span>
+                <span [ngClass]="carta.legalities.duel">duel</span>
+                <span [ngClass]="carta.legalities.explorer">explorer</span>
+                <span [ngClass]="carta.legalities.future">future</span>
+                <span [ngClass]="carta.legalities.gladiator">gladiator</span>
+                <span [ngClass]="carta.legalities.historic">historic</span>
+                <span [ngClass]="carta.legalities.historicbrawl">historicbrawl</span>
+                <span [ngClass]="carta.legalities.legacy">legacy</span>
+                <span [ngClass]="carta.legalities.modern">modern</span>
+                <span [ngClass]="carta.legalities.oldschool">oldschool</span>
+                <span [ngClass]="carta.legalities.pauper">pauper</span>
+                <span [ngClass]="carta.legalities.paupercommander">paupercommander</span>
+                <span [ngClass]="carta.legalities.penny">penny</span>
+                <span [ngClass]="carta.legalities.pioneer">pioneer</span>
+                <span [ngClass]="carta.legalities.premodern">premodern</span>
+                <span [ngClass]="carta.legalities.standard">standard</span>
+                <span [ngClass]="carta.legalities.vintage">vintage</span>                
+            </div>
+        </div>
+    </div>
+    <div class="otros-datos" *ngIf="carta != undefined">
+        <div class="precios">
+            <h4>Precios promedios:</h4>
+            <a [href]="carta.purchase_uris.cardmarket" target="_blank">
+                <span>MKM Normal</span>
+                <span>{{(carta.prices.eur != null)? carta.prices.eur : "???"}}</span>
+            </a>
+            <a [href]="carta.purchase_uris.cardmarket" target="_blank">
+                <span>MKM Normal</span>
+                <span>{{(carta.prices.eur_foil != null)? carta.prices.eur_foil : "???"}}</span>
+            </a>
+            <a [href]="carta.purchase_uris.tcgplayer" target="_blank">
+                <span>TCG Normal</span>
+                <span>{{(carta.prices.usd != null)? carta.prices.usd : "???"}}</span>
+            </a>
+            <a [href]="carta.purchase_uris.tcgplayer" target="_blank">
+                <span>TCG Normal</span>
+                <span>{{(carta.prices.usd_foil != null)? carta.prices.usd_foil : "???"}}</span>
+            </a>
+            <a [href]="carta.purchase_uris.cardhoarder" target="_blank">
+                <span>CardHoader Normal</span>
+                <span>{{(carta.prices.tix != null)? carta.prices.tix : "???"}}</span>
+            </a>
+        </div>
+        <div class="descargas">
+            <h4>Descargar y enlaces</h4>
+            <a [href]="(carta.image_uris == undefined)? carta.card_faces[0].image_uris.large :carta.image_uris.large" target="_blank">Imagen PNG</a>
+            <a *ngIf="carta.image_uris == undefined && carta.card_faces != undefined" [href]="carta.card_faces[1].image_uris.large" target="_blank">Segunda cara PNG</a>
+            <a [href]="(carta.image_uris == undefined)? carta.card_faces[0].image_uris.art_crop :carta.image_uris.art_crop" target="_blank">Ilustracion PNG</a>
+            <a *ngIf="carta.image_uris == undefined && carta.card_faces != undefined" [href]="(carta.image_uris == undefined)? carta.card_faces[1].image_uris.art_crop :carta.image_uris.art_crop" target="_blank">Ilustracion trasera PNG</a>
+        </div>
+    </div>
+</div>

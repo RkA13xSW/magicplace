@@ -1,0 +1,89 @@
+<div class="nuevo-mazo">
+    <div class="mazo">
+        <div class="superior-mazo">
+            <div class="nombre">
+                <label for="nombre">Nombre mazo</label>
+                <input (change)="guardarNombre($event)" type="text" name="nombreMazo" id="nombreMazo" placeholder="Nombre del mazo...">
+            </div>
+            <div class="guardar">
+                <button (click)="guardarMazo()" [disabled]="mazo.nombre.length < 1">Guardar</button>
+            </div>
+        </div>
+        <div class="cartas-principal">
+            <h4>Mazo principal ({{cantidades.principal}})</h4>
+            <div class="cartas-mazo">
+                <div class="carta" *ngFor="let carta of cartas.principal">
+                    <div class="carta-img">
+                        <a target="_blank" routerLink="../../catalogo/{{carta.id}}">    
+                            <img *ngIf="carta.datos?.image_uris != undefined && carta.datos?.image_uris.border_crop != null" [src]="carta.datos.image_uris.border_crop" [alt]="carta.datos.name">
+                            <img *ngIf="carta.datos?.card_faces != undefined && carta.datos.card_faces[0].image_uris?.border_crop != null" [src]="carta.datos.card_faces[0].image_uris.border_crop" [alt]="carta.datos.name">
+                        </a>                  
+                    </div>
+                    <div class="carta-opciones">
+                        <div class="carta-cantidad">
+                            <button (click)="quitarMazo(carta.id)">-</button>
+                            <span>{{carta.cantidad}}</span>
+                            <button (click)="aniadirMazo(carta.id)">+</button>
+                        </div>
+                        <div class="precio">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cartas-banquillo">
+            <h4>Banquillo ({{cantidades.banquillo}})</h4>
+            <div class="cartas-mazo">
+                <div class="carta" *ngFor="let carta of cartas.banquillo">
+                    <div class="carta-img">
+                        <a target="_blank" routerLink="../../catalogo/{{carta.id}}">    
+                            <img *ngIf="carta.datos?.image_uris != undefined && carta.datos?.image_uris.border_crop != null" [src]="carta.datos.image_uris.border_crop" [alt]="carta.datos.name">
+                            <img *ngIf="carta.datos?.card_faces != undefined && carta.datos.card_faces[0].image_uris?.border_crop != null" [src]="carta.datos.card_faces[0].image_uris.border_crop" [alt]="carta.datos.name">
+                        </a> 
+                    </div>
+                    <div class="carta-opciones">
+                        <div class="carta-cantidad">
+                            <button (click)="quitarBanquillo(carta.id)">-</button>
+                            <span>{{carta.cantidad}}</span>
+                            <button (click)="aniadirBanquillo(carta.id)">+</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="toggle-buscador" (click)="mostrarBuscador(true)">
+        <img src="../../../assets/iconos/vectores/buscador.png" alt="Buscar">
+    </button>
+    <div class="buscador">
+        <div class="cerrar-buscador">
+            <input (change)="buscarCarta(key.value)" type="search" #key="ngModel" ngModel name="key" id="buscar" placeholder="Buscar...">
+            <button (click)="mostrarBuscador(false)">X</button>
+        </div>
+        <a routerLink="../../catalogo" target="_blank">Busqueda Extensa</a>
+        <div class="buscador-cartas" *ngIf="cartasMostradas.length > 0">
+            <div class="buscador-carta" *ngFor="let carta of cartasMostradas">
+                <div class="buscador-img">
+                    <img *ngIf="carta?.image_uris != undefined && carta?.image_uris.border_crop != null" [src]="carta.image_uris.border_crop" [alt]="carta.name">
+                    <img *ngIf="carta?.card_faces != undefined && carta.card_faces[0].image_uris?.border_crop != null" [src]="carta.card_faces[0].image_uris.border_crop" [alt]="carta.name">
+                </div>
+                <div class="buscador-opciones">
+                    <button>
+                        <a target="_blank" routerLink="../../catalogo/{{carta.id}}">
+                            <img src="../../../assets/iconos/vectores/ver.png" alt="">
+                        </a>
+                    </button>
+                    <button title="Añadir mazo" (click)="aniadirMazo(carta.id)">
+                        <img src="../../../assets/iconos/vectores/mazo.png" alt="Mazo">
+                    </button>
+                    <button title="Añadir banquillo" (click)="aniadirBanquillo(carta.id)">
+                        <img src="../../../assets/iconos/vectores/banquillo.png" alt="banquillo">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <h4 class="mensaje-error" *ngIf="cartasMostradas.length == 0">No se han encontrado resultados...</h4>
+    </div>
+</div>

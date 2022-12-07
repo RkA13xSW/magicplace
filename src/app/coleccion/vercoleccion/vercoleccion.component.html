@@ -1,0 +1,95 @@
+<section>
+    <div class="coleccion" *ngIf="currentSet != undefined">
+        <div class="logo">
+            <img [src]="currentSet.icon_svg_uri" [alt]="currentSet.name">
+        </div>
+        <div class="info">
+            <h4>{{currentSet.name}}</h4>
+            <div class="info-general">
+                <div><span>Cartas:</span> <span>{{currentSet.card_count}}</span></div>
+                <div><span>Lanzamiento:</span> <span>{{currentSet.released_at | date :'dd/MM/yyyy'}}</span></div>
+                <div><span>Tipo:</span> <span>{{currentSet.set_type}}</span></div>
+                <div class="caracteristicas">
+                    <span *ngIf="currentSet.digital" title="Formato exclusivo digital">Digital</span>
+                    <span *ngIf="currentSet.nonfoil_only" title="Carece de cartas foil">Sin foil</span>
+                    <span *ngIf="currentSet.foil_only" title="Únicamente contiene cartas foil">Solo foil</span>
+                </div>
+                <div *ngIf="setProcediente != undefined"><span>Edicion perteneciente:</span> <span>{{currentSet.set_type}}</span></div>
+            </div>
+            <div class="info-precios">
+                <p>Normal..... {{(preciosTotales[0] == 0)? '???' :  (preciosTotales[0] | number:'1.2-2') }}€</p>
+                <p>Foil....... {{(preciosTotales[1] == 0)? '???' : (preciosTotales[1]| number:'1.2-2')}}€</p>
+                <p>Normal..... {{(preciosTotales[2] == 0)? '???' : (preciosTotales[2]| number:'1.2-2')}}$</p>
+                <p>Foil....... {{(preciosTotales[3] == 0)? '???' : (preciosTotales[3]| number:'1.2-2')}}$</p>
+                <p>Tix........ {{(preciosTotales[4] == 0)? '???' : (preciosTotales[4]| number:'1.2-2')}}</p>
+                <p *ngIf="presupuestoPreparado && currentSet.card_count < 650">
+                    <a (click)="generatePDF(currentSet.name)">Descargar presupuesto</a>
+                </p>
+                <p>Puede tardar según la cantidad de cartas...</p>
+            </div>
+        </div>
+    </div>
+    <div class="filtro-cartas">
+
+    </div>
+    <div class="cartas">
+        <div routerLink="../../catalogo/{{carta.id}}" class="carta" *ngFor="let carta of cartas">
+            <img *ngIf="carta?.image_uris != undefined && carta?.image_uris.large != null" [src]="carta.image_uris.large" [alt]="carta.name">
+            <img *ngIf="carta?.card_faces != undefined && carta.card_faces[0].image_uris?.large != null" [src]="carta.card_faces[0].image_uris.large" [alt]="carta.name">
+        </div>
+    </div>
+    <div class="volver" (click)="irArriba()">
+        <img src="../../assets/iconos/vectores/arrowup.png" alt="Arriba">
+    </div>
+    <div id="presupuesto" #presupuesto *ngIf="currentSet?.card_count < 650">
+        <div class="coleccion" *ngIf="currentSet != undefined">
+            <div class="info">
+                <h4>{{currentSet.name}}</h4>
+                <div class="info-general">
+                    <div><span>Cartas:</span> <span>{{currentSet.card_count}}</span></div>
+                    <div><span>Lanzamiento:</span> <span>{{currentSet.released_at | date :'dd/MM/yyyy'}}</span></div>
+                    <div><span>Tipo:</span> <span>{{currentSet.set_type}}</span></div>
+                    <div class="caracteristicas">
+                        <span *ngIf="currentSet.digital" title="Formato exclusivo digital">Digital</span>
+                        <span *ngIf="currentSet.nonfoil_only" title="Carece de cartas foil">Sin foil</span>
+                        <span *ngIf="currentSet.foil_only" title="Únicamente contiene cartas foil">Solo foil</span>
+                    </div>
+                    <div *ngIf="setProcediente != undefined"><span>Edicion perteneciente:</span> <span>{{currentSet.set_type}}</span></div>
+                </div>
+                <div class="info-precios">
+                    <p>Normal..... {{(preciosTotales[0] == 0)? '???' :  (preciosTotales[0] | number:'1.2-2')}} €</p>
+                    <p>Foil....... {{(preciosTotales[1] == 0)? '???' : (preciosTotales[1]| number:'1.2-2')}} €</p>
+                    <p>Normal..... {{(preciosTotales[2] == 0)? '???' : (preciosTotales[2]| number:'1.2-2')}} $</p>
+                    <p>Foil....... {{(preciosTotales[3] == 0)? '???' : (preciosTotales[3]| number:'1.2-2')}} $</p>
+                    <p>Tix........ {{(preciosTotales[4] == 0)? '???' : (preciosTotales[4]| number:'1.2-2')}}</p>
+                </div>
+            </div>
+        </div>
+        
+    <table *ngIf="cartas.length > 0">
+        <tr>
+          <th>Nº</th>
+          <th>Nombre</th>
+          <th>MKM</th>
+          <th>Foil €</th>
+          <th>NML €</th>
+          <th>Foil $</th>
+          <th>NML $</th>
+          <th>TIX</th>
+        </tr>
+        <tr *ngFor="let carta of cartas">
+          <td>{{carta.collector_number}}</td>
+          <td>{{carta.name}}</td>
+          <td>{{(carta.purchase_uris?.cardmarket != null)? carta.purchase_uris.cardmarket : '???'}}</td>
+          <td>{{(carta.prices.eur_foil != null)? carta.prices.eur_foil : '???'}}</td>
+          <td>{{(carta.prices.eur != null)? carta.prices.eur : '???'}}</td>
+          <td>{{(carta.prices.usd_foil != null)? carta.prices.usd_foil : '???'}}</td>
+          <td>{{(carta.prices.usd != null)? carta.prices.usd : '???'}}</td>
+          <td>{{(carta.prices.tix != null)? carta.prices.tix : '???'}}</td>
+          
+        </tr>
+      </table>
+      <p>Atentamente MagicPlace.</p>
+    </div>
+</section>
+

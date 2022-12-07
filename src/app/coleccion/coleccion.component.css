@@ -1,0 +1,120 @@
+section{
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--B);
+    overflow-x: hidden;
+}
+section p{
+  font-family: Arial, Helvetica, sans-serif;
+}
+.barra-filtros{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: fit-content;
+    background-color: var(--N);
+    border: 2px solid var(--R);
+    border-radius: 10px;
+    margin: auto;
+    padding: 10px;
+    min-width: 50vw;
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+.barra-filtros select{
+    border: 2px solid var(--G);
+    border-radius: 10px;
+}
+
+.barra-filtros button{
+    height: 50px;
+    width: 50px;
+    background-color: var(--R);
+    border-radius: 100%;
+    overflow: hidden;
+    padding: 10px;
+    border: 2px solid var(--G);
+}
+
+.barra-filtros button img{
+    height: 100%;
+
+}
+
+.barra-filtros div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;   
+}
+
+.barra-filtros div input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--G);
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  td, th {
+    border: 1px solid var(--N);
+    text-align: left;
+    padding: 8px;
+  }
+
+  
+  tr:nth-child(even) {
+    background-color: #acacac;
+  }
+
+  tr:hover{
+    background-color: var(--R);
+    cursor: pointer;
+    color: var(--B);
+  }
+
+  tr:first-of-type:hover{
+    background-color: initial;
+    cursor: initial;
+    color: initial;
+
+  }
+
+  tr td img{
+    height: 40px;
+  }
+
+.volver{
+  width: 30px;
+  height: 30px;
+  background-color: var(--B);
+  border-radius: 10px;
+  border: 2px solid var(--N);
+
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.volver img{
+  height: 100%;
+}
+
+#error{
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid var(--R);
+  background-color: var(--N);
+  color: var(--B);
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}

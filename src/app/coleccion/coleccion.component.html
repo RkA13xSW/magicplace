@@ -1,0 +1,34 @@
+<section>
+    <div class="barra-filtros">
+        <select name="filtro" id="filtro" (change)="aplicarFiltros(filter.value)" #filter="ngModel" ngModel name="filter">
+            <option value="nombre+">Nombre A-Z</option>
+            <option value="nombre-">Nombre Z-A</option>
+            <option value="cartas+">Cartas 0-9</option>
+            <option value="cartas-">Cartas 9-0</option>
+            <option value="fecha+">Fecha 0-9</option>
+            <option value="fecha-">Fecha 9-0</option>
+        </select>
+        <div>
+            <input (input)="buscarTxt(key.value)" type="search" #key="ngModel" ngModel name="key" id="buscador" placeholder="Buscar...">
+        </div>
+    </div>
+    <p>Total: <strong>{{setsActuales.length}}</strong></p>
+    <h4 id="error" *ngIf="setsActuales.length == 0" >No se han encontrado coincidencias...</h4>
+    <table *ngIf="setsActuales.length != 0">
+        <tr>
+          <th>Simbolo</th>
+          <th>Nombre</th>
+          <th>Fecha</th>
+          <th>Cartas</th>
+        </tr>
+        <tr routerLink="../coleccion/{{set.code}}" *ngFor="let set of setsActuales">
+          <td><img [src]="set.icon_svg_uri" [alt]="set.name"></td>
+          <td>{{set.name}}</td>
+          <td>{{set.released_at | date :'dd/MM/yyyy'}}</td>
+          <td>{{set.card_count}}</td>
+        </tr>
+      </table>
+      <div class="volver" (click)="irArriba()">
+        <img src="../../assets/iconos/vectores/arrowup.png" alt="Arriba">
+      </div>
+</section>
