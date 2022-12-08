@@ -3,8 +3,7 @@ header{
     z-index: 10;
     top: 20px;
     left: 20px;
-    height: auto;
-    max-height: 100vh;
+    height: fit-content;
     width: fit-content;
     background-color: var(--N);
     border-right: 2px solid var(--R);

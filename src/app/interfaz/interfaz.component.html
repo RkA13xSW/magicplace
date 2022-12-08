@@ -1,8 +1,8 @@
-<header>
+<header (mouseleave)="toogleNav()">
     <button id="botonNavegacion" (click)="toogleNav()">
         <img src="assets/iconos/logos/magic3.png" alt="MagicPlace">
     </button>
-    <nav id="navegacion" class="noVer" (mouseleave)="toogleNav()">
+    <nav id="navegacion" class="noVer">
         <a class="enlace" routerLink="">
             <img src="assets/iconos/logos/magic3.png" alt="MagicPlace">
             <p>MagicPlace</p>
